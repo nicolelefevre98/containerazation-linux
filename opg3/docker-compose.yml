@@ -1,0 +1,46 @@
+# versionen
+version: '3.9'
+
+services:
+    birthe:
+      image: nginx:stable
+      ports:
+      - "1234:80"
+
+    ubuntu:
+      image: ubuntu 
+      stdin_open: true
+      tty: true
+
+    ghost: 
+      image: ghost
+      restart: always
+      ports:
+        - "2368:2368"
+      environment:
+        database__client: mysql
+        database__connection__host: mysql
+        database__connection__user: ghost
+        database__connection__password: ghostpass
+        database__connection__database: ghost
+        mail__transport: 'SMTP'
+        mail__options__service: 'Outlook'
+        mail__options__port: 587
+        mail__options__secureConnection: true
+        mail__options__host: 'smtp-mail.outlook.com'
+        mail__options__auth__user: 'nicole.lefevre98@hotmail.com'
+        mail__options__auth__pass: 'hej123'
+        mail__from: 'nicole.lefevre98@hotmail.com'
+      depends_on:
+        - mysql
+
+    mysql: 
+      image: mysql/mysql-server:8.0.13
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: anotherpass
+        MYSQL_DATABASE: ghost
+        MYSQL_USER: ghost
+        MYSQL_PASSWORD: ghostpass
+      volumes:
+        - ./data:/var/lib/mysql

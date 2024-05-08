@@ -1,0 +1,16 @@
+{
+  "name": "opgave3.2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx strapi build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@strapi/strapi": "4.x.x"
+  }
+  
+}
